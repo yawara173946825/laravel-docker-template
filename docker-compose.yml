@@ -10,11 +10,12 @@ services:
     depends_on:
       - php
     volumes:
-    # プロジェクトは毎回contents配下に生成される
+      # プロジェクトに合わせる必要あり
       - ./project/contents:/var/www/html
     environment:
       - CONTAINER_ENV=env
       - DB_PASSWORD=root
+      # プロジェクトに合わせる必要あり
       - APP_URL=http://localhost/unnamed_project
     networks:
       - unnamed-project
@@ -28,7 +29,7 @@ services:
       - mysql
     environment:
       - CONTAINER_ENV=dev
-    # TODO:あとでディレクトリ構成を考えて設定する
+    # プロジェクトに合わせる必要あり
     volumes:
       - ./project/contents:/var/www/html
       - project_vendor:/var/www/html/myapp/vendor
@@ -58,6 +59,7 @@ services:
     networks:
       - unnamed-project
 
+# プロジェクトに合わせる必要あり
 volumes:
   project_vendor:
   mysql_data:

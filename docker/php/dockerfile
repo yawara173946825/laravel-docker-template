@@ -22,9 +22,11 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 
 # コンテンツのコピー（これをすることでmyappに権限が付与される）
+# プロジェクトに合わせる必要あり
 ADD --chown=www-data:www-data ./project/contents/ /var/www/html/
 
 # アプリケーション配下をカレントディレクトリにする
+# プロジェクトに合わせる必要あり
 WORKDIR /var/www/html/myapp
 
 # Composerのバイナリを公式イメージからPHPにコピー
@@ -33,5 +35,3 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 # パッケージのインストールによって出る質問事項をスキップするために環境変数を設定
 ENV COMPOSER_ALLOW_SUPERUSER 1
 ENV COMPOSER_NO_INTERACTION 1
-
-# WORKDIR /var/www
